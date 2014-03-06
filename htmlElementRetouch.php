@@ -38,17 +38,27 @@ class htmlElementRetouch {
     }
 
     /*
-     * 要素を検索するセレクタを生成する
+     * 要素を検索するセレクタを生成する(XPath版)
      */
     function _createSelector($text){
         $root = str_get_html($text);
         $selector = "";
         $select_array = array();
-        //CSSセレクタ版
-//        $this->_getNodesInfo($root, $selector, $select_array);
-        //XPath版
         $flag = 0;
         $this->_getNodesInfoXpath($root, $selector, $select_array, $flag);
+        return $select_array;
+
+    }
+
+    /*
+     * 要素を検索するセレクタを生成する(CSSセレクタ版)
+     */
+    function _createSelectorCss($text){
+        $root = str_get_html($text);
+        $selector = "";
+        $select_array = array();
+        $flag = 0;
+        $this->_getNodesInfo($root, $selector, $select_array, $flag);
         return $select_array;
     }
 
