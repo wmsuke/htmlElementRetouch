@@ -13,6 +13,10 @@ class htmlElementRetouch {
     function __construct() {
         
     }
+
+    public function replace() {
+        //置換。。。
+    }
     
     public function compare() {
         //HTMLファイルをパース        
