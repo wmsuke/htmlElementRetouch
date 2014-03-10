@@ -41,14 +41,29 @@ class htmlElementRetouchTest extends PHPUnit_Framework_TestCase {
      * @covers htmlElementRetouch::_createSelector
      */
     public function test_createSelector() {
-        $check = array(
-            0 => "//span"
-        );
+        // 要素一つ
         $this->assertEquals(
-                $check,
+                ["//span"],
                 $this->object->_createSelector("<span>aaaa</span>")
             );
 
+        // クラスを付ける
+        $this->assertEquals(
+                ['//span[@name="robots"][@content="index,follow"]'],
+                $this->object->_createSelector('<span name="robots" content="index,follow">aaaa</span>')
+            );
+        
+        // 並列要素
+        $this->assertEquals(
+                ["//li", "//li", "//li"],
+                $this->object->_createSelector("<li>aaa</li><li>bbb</li><li>ccc</li>")
+            );
+        
+        // 親子
+        $this->assertEquals(
+                ["//ul//li", "//ul//li", "//ul//li"],
+                $this->object->_createSelector("<ul><li>aaa</li><li>bbb</li><li>ccc</li></ul>")
+            );
     }
 
 }
