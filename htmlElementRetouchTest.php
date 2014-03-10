@@ -35,29 +35,20 @@ class htmlElementRetouchTest extends PHPUnit_Framework_TestCase {
         $this->markTestIncomplete(
                 'This test has not been implemented yet.'
         );
-
     }
 
     /**
      * @covers htmlElementRetouch::_createSelector
-     * @todo   Implement test_createSelector().
      */
     public function test_createSelector() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
+        $check = array(
+            0 => "//span"
         );
-    }
+        $this->assertEquals(
+                $check,
+                $this->object->_createSelector("<span>aaaa</span>")
+            );
 
-    /**
-     * @covers htmlElementRetouch::_getNodesInfo
-     * @todo   Implement test_getNodesInfo().
-     */
-    public function test_getNodesInfo() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
     }
 
 }
