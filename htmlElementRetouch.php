@@ -119,9 +119,6 @@ class htmlElementRetouch {
     function _createAtrributeXpath($node){
         $selector = "";
         foreach($node->getAllAttributes()  as $name => $value){
-            if($node->tag === "img" && $name === "src"){
-                continue;
-            }
             $selector .= sprintf('[@%s="%s"]', $name, $value);
         }
         return $selector;
