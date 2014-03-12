@@ -98,8 +98,8 @@ EOT
 
         // クラスを付ける
         $this->assertEquals(
-                ['//span[@name="robots"][@content="index,follow"]'],
-                $this->object->_createSelector('<span name="robots" content="index,follow">aaaa</span>')
+                ['//img[@src="img/img_r0001.gif"][@alt="IMG"][@width="100"][@height="20"]'],
+                $this->object->_createSelector('<img src="img/img_r0001.gif" alt="IMG" width="100" height="20"/>')
             );
         
         // 並列要素
