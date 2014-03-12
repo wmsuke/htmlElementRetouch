@@ -99,7 +99,7 @@ class htmlElementRetouch {
      */
     function _getNodesInfoXpath($nodes, &$selector, &$select_array, &$flag){
         foreach ($nodes->childNodes() as $node) {
-            $se = "//$node->tag";
+            $se = "/$node->tag";
             $se .= $this->_createAtrributeXpath($node);
             if($node->has_child()) {
                 $flag = 1;
@@ -108,7 +108,7 @@ class htmlElementRetouch {
             }else{
                 if($flag == 1){
                     //並列要素の場合は前回子孫ありだと要素が残っているので削除する
-                    $selector = str_replace("//".$node->parent()->tag.$this->_createAtrributeXpath($node->parent()), '', $selector);
+                    $selector = str_replace("/".$node->parent()->tag.$this->_createAtrributeXpath($node->parent()), '', $selector);
                     $flag = 0;
                 }
                 $selector .= $se;
