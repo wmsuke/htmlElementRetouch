@@ -1,28 +1,33 @@
 <?php
 
 require_once("simple_html_dom.php");
-require_once("Zend/Dom/Query.php");
+require_once("Zend/Dom/Query.php");       
 
 class htmlElementRetouch {
 
     public $item = array();
     public $hit = array();
     public $name = array();
-    public $context_file;
+    public $context_data;
 
     function __construct() {
         
     }
-
+    
+    /*
+     * 置換処理を実行
+     */
     public function replace() {
         //置換。。。
     }
-    
+
+    /*
+     * 比較処理を実行
+     */
     public function compare() {
-        //HTMLファイルをパース        
+        //HTMLデータをパース        
         $domQuery = new Zend_Dom_Query();
-        $text = file_get_contents($this->context_file);
-        $domQuery->setDocument($text, 'UTF-8');
+        $domQuery->setDocument($this->context_data, 'UTF-8');
 
         // 検索対象分ループ
         for ($i = 0; $i < count($this->item); $i++) {
