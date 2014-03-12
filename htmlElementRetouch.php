@@ -112,7 +112,7 @@ class htmlElementRetouch {
                     $flag = 0;
                 }
                 $selector .= $se;
-                array_push($select_array, $selector);
+                array_push($select_array, '/'.$selector);
                 $selector = str_replace($se, '', $selector);
             }
         }
