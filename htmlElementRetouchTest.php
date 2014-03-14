@@ -110,8 +110,23 @@ EOT
         
         // 親子
         $this->assertEquals(
-                ["//ul+li", "//li", "//li"],
+                ["//ul", "//ul/li", "//ul/li", "//ul/li"],
                 $this->object->_createSelector("<ul><li>aaa</li><li>bbb</li><li>ccc</li></ul>")
+            );
+        
+        // 並列+親子
+        $this->assertEquals(
+                ["//div", "//div/ul", "//div/ul/li", "//div/ul/li", "//div/span"],
+                $this->object->_createSelector(<<<EOT
+<div>
+    <ul>
+        <li>aa</li>
+        <li>bb</li>
+    </ul>
+    <span>cc</span>
+</div>
+EOT
+                        )
             );
     }
 
