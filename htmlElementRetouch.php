@@ -53,10 +53,8 @@ class htmlElementRetouch {
         $root = str_get_html($text);
         $selector = "";
         $select_array = array();
-        $flag = 0;
-        $this->_getNodesInfoXpath($root, $selector, $select_array, $flag);
+        $this->_getNodesInfoXpath($root, $selector, $select_array);
         return $select_array;
-
     }
 
     /*
@@ -66,8 +64,7 @@ class htmlElementRetouch {
         $root = str_get_html($text);
         $selector = "";
         $select_array = array();
-        $flag = 0;
-        $this->_getNodesInfo($root, $selector, $select_array, $flag);
+        $this->_getNodesInfo($root, $selector, $select_array);
         return $select_array;
     }
 
@@ -97,24 +94,32 @@ class htmlElementRetouch {
     /*
      * 要素をXPathに変換
      */
-    function _getNodesInfoXpath($nodes, &$selector, &$select_array, &$flag){
+    function _getNodesInfoXpath($nodes, &$selector, &$select_array){
         foreach ($nodes->childNodes() as $node) {
-            $se = "/$node->tag";
-            $se .= $this->_createAtrributeXpath($node);
+            $node_tag = '/'.$node->tag.$this->_createAtrributeXpath($node);
+            $selector .= $node_tag;
+            array_push($select_array, '/'.$selector);
             if($node->has_child()) {
-                $flag = 1;
-                $selector .= $se;
-                $this->_getNodesInfoXpath($node, $selector, $select_array, $flag);
+                $this->_getNodesInfoXpath($node, $selector, $select_array);
             }else{
-                if($flag == 1){
-                    //並列要素の場合は前回子孫ありだと要素が残っているので削除する
-                    $selector = str_replace("/".$node->parent()->tag.$this->_createAtrributeXpath($node->parent()), '', $selector);
-                    $flag = 0;
-                }
-                $selector .= $se;
-                array_push($select_array, '/'.$selector);
-                $selector = str_replace($se, '', $selector);
+                $selector = preg_replace('('.preg_quote($node_tag).'$)', '',  $selector);               
+                $this->_goBackReplace($node, $selector);
             }
+        }
+    }
+    
+    /*
+     * 親要素を削除
+     */
+    function _goBackReplace($node, &$selector){
+        if(!is_null($node->parent())){
+            if(strlen($node->nextSibling()) === 0 && $node->parent()->tag != 'root'){
+                $selector = preg_replace(
+                        '(\/'.preg_quote($node->parent()->tag.$this->_createAtrributeXpath($node->parent())).'$)',
+                        '',
+                        $selector);
+                $this->_goBackReplace($node->parent(), $selector);
+            }           
         }
     }
     
