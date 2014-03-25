@@ -1,7 +1,7 @@
 <?php
 
 require_once("simple_html_dom.php");
-require_once("Zend/Dom/Query.php");       
+require_once("Zend/Dom/Query.php");
 
 class htmlElementRetouch {
 
@@ -39,7 +39,7 @@ class htmlElementRetouch {
                 if($result->count() > 0){
                     $check = true;
                 }else{
-                    $check = false;                
+                    $check = false;
                 }
             }
             $this->hit[$i] = $check;
