@@ -18,7 +18,13 @@ class htmlElementRetouch {
      * 置換処理を実行
      */
     public function replace() {
-        //置換。。。
+        $data = $this->context_data;
+        for ($i = 0; $i < count($this->item); $i++) {
+            if($this->hit[$i] === true){
+                // ここで置換処理
+            }
+        }
+        return $data;
     }
 
     /*
