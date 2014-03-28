@@ -54,6 +54,42 @@ EOT;
     }
 
     /**
+     * @covers htmlElementRetouch::replace
+     */
+    public function testReplace() {
+        //事前準備
+        $this->object->item = [
+            '<meta name="description" content="testテスト試み" />',
+            <<<EOT
+<div>
+    <li name="robots" content="index,follow">content あり</li>
+    <span id="span1">aaaaa</span>
+    <div class="class1">
+        <a href="/" name="pagetop">
+            <img src="img/img_r0001.gif" alt="IMG" width="100" height="20"/>
+        </a>
+    </div>
+    <p class="font">content なし</p>
+    <div id="div1">
+        <span>おおお</span>
+    </div>
+</div>
+EOT
+        ];
+        $this->object->name = [
+            "item1",
+            "item2"
+        ];
+        $this->object->hit = [
+            true,
+            true
+        ];
+        $this->object->replace();
+        
+    }
+
+    
+    /**
      * @covers htmlElementRetouch::compare
      */
     public function testCompare() {
