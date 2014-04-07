@@ -18,7 +18,8 @@ class htmlElementRetouch {
      * 置換処理を実行
      */
     public function replace() {
-        $data = $this->context_data;
+        $domQuery = new Zend_Dom_Query();
+        $domQuery->setDocument($this->context_data, 'UTF-8');
         for ($i = 0; $i < count($this->item); $i++) {
             if($this->hit[$i] === true){
                 // ここで置換処理
